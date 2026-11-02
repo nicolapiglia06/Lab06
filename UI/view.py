@@ -64,7 +64,7 @@ class View:
 
         # Altri Pulsanti da implementare (es. "Mostra" e "Cerca")
         pulsante_cerca_strumenti = ft.Button("Cerca", on_click=self.controller.cerca_strumenti)
-
+        pulsante_mostra_strumenti = ft.Button("Mostra", on_click=self.controller.mostra_strumenti)
         # --- LAYOUT ---
         self.page.add(
             self.toggle_cambia_tema,
@@ -82,10 +82,14 @@ class View:
             ft.Divider(),
 
             # Sezione 3
-            # TODO
+
+            ft.Text("Strumenti", size=20, weight=ft.FontWeight.BOLD),
+            pulsante_mostra_strumenti,
+            ft.Container(content=self.lista_strumenti, height=200),
+            ft.Divider(),
 
             # Sezione 4
-            ft.Divider(),ft.Text("cerca strumenti per tipo",size = 20 ),
+            ft.Text("cerca strumenti per tipo",size = 20 ),
             ft.Row(
                 controls=[self.input_tipo_strumento, pulsante_cerca_strumenti],
                 alignment=ft.MainAxisAlignment.CENTER,

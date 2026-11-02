@@ -76,7 +76,7 @@ class DepositoStrumenti:
         query = "SELECT * FROM strumento WHERE LOWER(tipo) = LOWER(%s)"
         strumenti = []
         try:
-            cursor.execute(query)
+            cursor.execute(query, (tipo,))
             for row in cursor:
                 strumento = Strumento(
                     row['codice'],

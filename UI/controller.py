@@ -29,22 +29,12 @@ class Controller:
 
     # Altre Funzioni Event Handler
     def mostra_strumenti(self, e):
-        """
-        Gestisce il click sul pulsante 'Mostra' per caricare tutti gli strumenti dal database.
-        """
-        # 1. Richiede al modello la lista completa degli strumenti presenti nel DB
         strumenti = self._model.get_strumenti()
-
-        # 2. Svuota la ListView della View per evitare duplicati
         self._view.lista_strumenti.controls.clear()
-
-        # 3. Gestione dell'errore di connessione (se il model restituisce None)
         if strumenti is None:
             self._view.show_alert("Errore durante la connessione al database!")
             self._view.update()
             return
-
-        # 4. Se non ci sono strumenti o se la lista è stata popolata
         if not strumenti:
             self._view.lista_strumenti.controls.append(
                 ft.Text("Nessuno strumento presente nel deposito.")
@@ -52,8 +42,6 @@ class Controller:
         else:
             for s in strumenti:
                 self._view.lista_strumenti.controls.append(ft.Text(str(s)))
-
-        # 5. Aggiorna l'interfaccia grafica per mostrare il risultato
         self._view.update()
     def cerca_strumenti (self,e):
         tipo = self._view.input_tipo_strumento.value
