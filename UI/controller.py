@@ -28,4 +28,24 @@ class Controller:
         self._view.update()
 
     # Altre Funzioni Event Handler
-    # TODO
+    def cerca_strumenti (self,e):
+        tipo = self._view.input_tipo_strumento.value
+        if not tipo or not tipo.strip():
+            self._view.show_alert("Inserisci un tipo di strumento valido per la ricerca!")
+            self._view.update()
+            return
+        tipo_pulito = tipo.strip()
+        strumenti = self._model.cerca_strumenti_per_tipo(tipo_pulito)
+        self._view.lista_strumenti_ricerca.controls.clear()
+        if strumenti is None:
+            self._view.show_alert("errore")
+            self._view.update()
+            return
+        if not strumenti:
+            self._view.lista_strumenti_ricerca.controls.append(
+                ft.Text(f"Nessuno strumento trovato per il tipo '{tipo_pulito}'.")
+            )
+        else:
+            for s in strumenti:
+                self._view.lista_strumenti_ricerca.controls.append(ft.Text(str(s)))
+        self._view.update()
